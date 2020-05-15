@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -29,7 +30,7 @@ import java.util.TreeSet;
 public class AgenciaAlquiler {
 	private String nombre; // el nombre de la agencia
 	private List<Vehiculo> flota; // la lista de vehÃ­culos
-	public static final String FICHERO_ENTRADA = "flota.csv";
+	public static final String FICHERO_ENTRADA = "/flota.csv";
 	public static final String FICHERO_SALIDA = "marcasmodelos.txt";
 
 	/**
@@ -104,7 +105,9 @@ public class AgenciaAlquiler {
 		int lineasError = 0;
 		BufferedReader entrada = null;
 		try {
-			entrada = new BufferedReader(new FileReader(FICHERO_ENTRADA));
+			//entrada = new BufferedReader(new FileReader(FICHERO_ENTRADA));
+			entrada = new BufferedReader(new InputStreamReader(
+					this.getClass().getResourceAsStream(FICHERO_ENTRADA)));
 			String linea = entrada.readLine();
 			while (linea != null) {
 				try {
@@ -125,7 +128,7 @@ public class AgenciaAlquiler {
 			try {
 				entrada.close();
 			} catch (IOException e) {
-				System.out.print("Se produjo un error al cerrar el fichero. \nPuede que su información no se haya guardado");;
+				System.out.print("Se produjo un error al cerrar el fichero. \nPuede que su informaciï¿½n no se haya guardado");;
 			}
 		}
 		return lineasError;
@@ -137,7 +140,7 @@ public class AgenciaAlquiler {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Vehículos en alquiler de la agencia " + this.getNombre() + "\nTotal vehículos: " + flota.size()
+		sb.append("Vehï¿½culos en alquiler de la agencia " + this.getNombre() + "\nTotal vehï¿½culos: " + flota.size()
 				+ "\n");
 		for (Vehiculo v : flota) {
 			sb.append(v.toString() + "\n-----------------------------------------------------\n");
@@ -155,7 +158,7 @@ public class AgenciaAlquiler {
 		sb.append("Coches de alquiler en la agencia\n");
 		for (Vehiculo v : flota) {
 			if (v instanceof Coche) {
-				sb.append(v.toString() + "\nCoste alquiler " + dias + " días: " + v.calcularPrecioAlquiler(dias)
+				sb.append(v.toString() + "\nCoste alquiler " + dias + " dï¿½as: " + v.calcularPrecioAlquiler(dias)
 						+ "\n-----------------------------------------------------\n");
 			}
 		}
@@ -227,8 +230,8 @@ public class AgenciaAlquiler {
 	}
 
 	/**
-	 * Método qu guarda en el fichero "marcasmodelos.txt" la relacion de marcas de
-	 * vehículos con sus modelos asociados.
+	 * Mï¿½todo qu guarda en el fichero "marcasmodelos.txt" la relacion de marcas de
+	 * vehï¿½culos con sus modelos asociados.
 	 */
 	public void guardarMarcasModelos() throws IOException, NullPointerException {
 		PrintWriter salida = null;
